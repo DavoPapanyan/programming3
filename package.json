@@ -1,0 +1,23 @@
+{
+  "name": "lesson3",
+  "version": "1.0.0",
+  "description": "my project",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Davo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavoPapanyan/programming3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DavoPapanyan/programming3/issues"
+  },
+  "homepage": "https://github.com/DavoPapanyan/programming3#readme"
+}
