@@ -1,4 +1,5 @@
-class Witch extends Creature {
+let Creature = require('./creature')
+module.exports = class Witch extends Creature {
     constructor(x, y, index) {
        super(x, y , index)
         this.energy = 8;
@@ -22,7 +23,7 @@ class Witch extends Creature {
         return super.chooseCell(character)
     }
     mul() {
-        var newCell = random(this.chooseCell(0));
+        var newCell = this.selectRandomCell(0);
         if (newCell) {
             var newWitch = new Witch(newCell[0], newCell[1], 4);
             witchArr.push(newWitch);

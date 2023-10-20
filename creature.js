@@ -1,4 +1,4 @@
-class Creature {
+module.exports = class Creature {
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -14,6 +14,12 @@ class Creature {
              [this.x + 1, this.y + 1]
          ];
      }
+
+     selectRandomCell(character) {
+        const cells = this.chooseCell(character);
+        const randomIndex = Math.floor(Math.random() * cells.length);
+        return cells[randomIndex];
+        }
      chooseCell(character) {
         var found = [];
         for (var i in this.directions) {

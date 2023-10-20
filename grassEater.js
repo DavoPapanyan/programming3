@@ -1,4 +1,5 @@
-class GrassEater extends Creature{
+let Creature = require('./creature')
+module.exports = class GrassEater extends Creature{
     constructor(x, y, index) {
         super(x, y, index)
         this.energy = 8;
@@ -22,7 +23,7 @@ class GrassEater extends Creature{
         return super.chooseCell(character)
     }
     mul() {
-        var newCell = random(this.chooseCell(0));
+        var newCell = this.selectRandomCell(0);
         if (newCell) {
             var newGrassE = new GrassEater(newCell[0], newCell[1], 2);
             grassEaterArr.push(newGrassE);

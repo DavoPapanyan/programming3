@@ -1,4 +1,5 @@
-class Predator extends Creature {
+let Creature = require('./creature')
+module.exports = class Predator extends Creature {
     constructor(x, y, index) {
        super(x, y, index)
         this.energy = 8;
@@ -22,7 +23,7 @@ class Predator extends Creature {
         return super.chooseCell(character)
     }
     mul() {
-        var newCell = random(this.chooseCell(0));
+        var newCell = this.selectRandomCell(0);
         if (newCell) {
             var newPredator = new Predator(newCell[0], newCell[1], 3);
             predatorArr.push(newPredator);

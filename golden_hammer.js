@@ -1,4 +1,5 @@
-class GoldenHammer {
+let Creature = require('./creature')
+module.exports = class GoldenHammer extends Creature{
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
@@ -19,23 +20,9 @@ class GoldenHammer {
         ];
     }
 
-    chooseCell(character) {
-        this.getNewCoordinates();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                    break;
-                }
-            }
-        }
-        return found;
-    }
+
     mul() {
-        var newCell = random(this.chooseCell(0));
+        var newCell = this.selectRandomCell(0);
         if (newCell) {
             var newGoldenHammer = new GoldenHammer(newCell[0], newCell[1], 5);
             goldenHammerArr.push(newGoldenHammer);
