@@ -1,10 +1,8 @@
 let Creature = require('./creature')
 module.exports = class GoldenHammer extends Creature{
     constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
+        super(x, y, index)
         this.energy = 8;
-        this.index = index;
         this.directions = [];
     }
     getNewCoordinates() {

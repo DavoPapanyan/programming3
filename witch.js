@@ -1,7 +1,7 @@
 let Creature = require('./creature')
 module.exports = class Witch extends Creature {
     constructor(x, y, index) {
-       super(x, y , index)
+       super(x, y, index)
         this.energy = 8;
         this.directions = [];
     }

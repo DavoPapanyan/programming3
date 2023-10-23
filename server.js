@@ -58,7 +58,7 @@ function fillMatrix(cellNum, grassNum, grEaterNum, predatorNum, witchNum, golden
 }
 
 function initGame() {
-    fillMatrix(cellNum, 30, 10, 5, 5, 5)
+    matrix = fillMatrix(cellNum, 30, 10, 5, 5, 5)
     console.log(matrix);
     
     initArrays()
@@ -98,7 +98,7 @@ function initArrays() {
 }
 
 
-fillMatrix(cellNum)
+// fillMatrix(cellNum)
 let speed = 300
 let intId;
 
@@ -112,7 +112,6 @@ function startInterval() {
 function playGame() {
     for (var i in grassArr) {
         grassArr[i].mul();
-
     }
     for (var i in grassEaterArr) {
         grassEaterArr[i].eat();
@@ -126,10 +125,27 @@ function playGame() {
     for (var i in goldenHammerArr) {
         goldenHammerArr[i].eat();
     }
+    io.emit('draw matrix', matrix)
 }
 
 io.on("connection", function (socket) {
     socket.emit('draw matrix', matrix)
     initGame()
+    socket.on('pause game', handlePauseGame)
+    socket.on('restart game', handleRestartGame)
 })
 
+function handlePauseGame(ifPaused){
+    if (ifPaused){
+        clearInterval(intId)
+    }else{
+        startInterval();
+    }
+}
+
+
+
+function handleRestartGame(){
+    clearInterval(intId)
+    initGame()
+}
