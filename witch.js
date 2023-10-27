@@ -1,4 +1,6 @@
 let Creature = require('./creature')
+const io = require('./server')
+
 module.exports = class Witch extends Creature {
     constructor(x, y, index) {
        super(x, y, index)
@@ -25,6 +27,8 @@ module.exports = class Witch extends Creature {
     mul() {
         var newCell = this.selectRandomCell(0);
         if (newCell) {
+            statisticsObj.witch++
+            io.emit('change statistics', statisticsObj)
             var newWitch = new Witch(newCell[0], newCell[1], 4);
             witchArr.push(newWitch);
             matrix[newCell[1]][newCell[0]] = 4;

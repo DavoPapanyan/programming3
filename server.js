@@ -1,9 +1,9 @@
 const express = require("express")
 const app = express()
 const http = require('http')
-
 const server = http.createServer(app)
 const io=require('socket.io')(server)
+module.exports = io;
 
 app.use(express.static("."));
 
@@ -13,6 +13,14 @@ app.get('/', (req, res) => {
 server.listen(3500, () => {
     console.log('Server is listening to port 3500');
 })
+
+statisticsObj = {
+    grass: 0,
+    grassEater: 0,
+    predator: 0,
+    witch: 0,
+    goldenHammer: 0, 
+};
 
 matrix = []
 let cellNum = 20
@@ -133,6 +141,7 @@ io.on("connection", function (socket) {
     initGame()
     socket.on('pause game', handlePauseGame)
     socket.on('restart game', handleRestartGame)
+    socket.on("change season", handleChangeSeason)
 })
 
 function handlePauseGame(ifPaused){
@@ -148,4 +157,16 @@ function handlePauseGame(ifPaused){
 function handleRestartGame(){
     clearInterval(intId)
     initGame()
+}
+
+function handleChangeSeason(season) {
+  if (season == 1){
+      speed = 1000
+  }
+  else if(season == 2 || season == 4){
+      speed = 700
+    }
+    else{
+        speed = 300 
+    }
 }

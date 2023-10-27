@@ -1,4 +1,6 @@
 let Creature = require('./creature')
+const io = require('./server')
+
 module.exports = class GrassEater extends Creature{
     constructor(x, y, index) {
         super(x, y, index)
@@ -25,6 +27,8 @@ module.exports = class GrassEater extends Creature{
     mul() {
         var newCell = this.selectRandomCell(0);
         if (newCell) {
+            statisticsObj.grassEater++
+            io.emit('change statistics', statisticsObj)
             var newGrassE = new GrassEater(newCell[0], newCell[1], 2);
             grassEaterArr.push(newGrassE);
             matrix[newCell[1]][newCell[0]] = 2;

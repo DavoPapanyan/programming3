@@ -1,4 +1,6 @@
 let Creature = require('./creature')
+const io = require('./server')
+
 module.exports = class GoldenHammer extends Creature{
     constructor(x, y, index) {
         super(x, y, index)
@@ -18,10 +20,15 @@ module.exports = class GoldenHammer extends Creature{
         ];
     }
 
-
-    mul() {
+    chooseCell(character) {
+        this.getNewCoordinates();
+        return super.chooseCell(character)
+    }
+     mul() {
         var newCell = this.selectRandomCell(0);
         if (newCell) {
+            statisticsObj.goldenHammer++
+            io.emit('change statistics', statisticsObj)
             var newGoldenHammer = new GoldenHammer(newCell[0], newCell[1], 5);
             goldenHammerArr.push(newGoldenHammer);
             matrix[newCell[1]][newCell[0]] = 5;
